@@ -30,11 +30,23 @@ struct node*insert(struct node * temp, int key) {
 	/* return the (unchanged) node pointer */
 	return temp;
 }
+struct node*searsh(struct node*temp, int data) {
+	// Base Cases : temp is null or key is present at root
+	if (temp == NULL) {
+		return temp;
+	}
+	//Key is greater than temp's key 
+	if (temp->data < data)
+		return insert(temp->right, data);
+	//Key is smaller than temp's key 
+	return insert(temp->left, data);
+}
 void main() {
 	struct node*root = NULL;
 	root = insert(root, 5);
 	insert(root, 4);
 	insert(root, 6);
 	insert(root, 9);
+	searsh(root, 6);
 	getchar();
 }
