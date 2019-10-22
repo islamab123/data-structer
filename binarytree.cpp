@@ -95,19 +95,32 @@ bool if_complete(struct node*node) {
 		return true;
 	}return false;
 }
+int if_identical(struct node*root, struct node*temp) {
+	if (root == NULL&&temp == NULL) {
+		return 1;
+	}
+	if (root != NULL&&temp != NULL) {
+		if (root->data == temp->data) {
+			return(if_identical(root->left, temp->left) && if_identical(root->right, temp->right));
+		}
+	}
+	return 0;
+
+}
 void main() {
-	int min = 0, max = 0, max_length;
+	int min = 0, max = 0, max_length, identical;
 	struct node*root = NULL;
+	struct node*temp = NULL;
 	root = insert(root, 10);
 	insert(root, 5);
 	insert(root, 12);
 	insert(root, 4);
 	insert(root, 6);
-	insert(root, 15);
-	insert(root, 11);
-	insert(root, 20);
-	insert(root, 10);
-	insert(root, 25);
+	temp = insert(temp, 10);
+	insert(temp, 45);
+	insert(temp, 4);
+	insert(temp, 4);
+	insert(temp, 6);
 	min = min_value(root);
 	printf("\n  the min value in this binary tree is :  %d", min);
 	max = max_value(root);
@@ -124,5 +137,12 @@ void main() {
 	if (if_complete(root)) {
 		printf("\nis comblete\n");
 	}
+	identical = if_identical(root, temp);
+	if (identical == 0) {
+		printf("\nthe two trees are not identical\n");
+	}
+	else
+		printf("\nthe two trees are identical\n");
+
 	getchar();
 }
