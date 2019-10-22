@@ -73,6 +73,20 @@ int print_inorder(struct node*node) {
 		print_inorder(node->right);
 	}
 }
+int print_postorder(struct node*node) {
+	if (node == NULL)
+		return 0;
+	else {
+		// first recur on left subtree 
+		print_postorder(node->left);
+
+		// then recur on right subtree 
+		print_postorder(node->right);
+
+		// now deal with the node 
+		printf("%d ", node->data);
+	}
+}
 void main() {
 	int min = 0,max=0;
 	struct node*root = NULL;
@@ -87,5 +101,7 @@ void main() {
 	printf("\n  the max value in this binary tree is : %d", max);
 	printf("the inorder print :\n");
 	print_inorder(root);
+	printf("\nthe postorder print :\n");
+	print_postorder(root);
 	getchar();
 }
