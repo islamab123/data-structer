@@ -79,27 +79,32 @@ int max_depth(struct node*node) {
 		else return(r_depath + 1);
 	}
 }
-
-bool check_if_full(struct node*node) {
+bool if_full(struct node*node) {
 	if (node == NULL) {
 		return false;
 	}
 	if (max_depth(node->left) == max_depth(node->right)) {
-		return check_if_full(node->left) && check_if_full(node->right);
+		return if_full(node->left) && if_full(node->right);
+	}return false;
+}
+bool if_complete(struct node*node) {
+	if (node == NULL) {
+		return false;
 	}
-	return false;
-
+	if (max_depth(node->left) != max_depth(node->right)) {
+		return true;
+	}return false;
 }
 void main() {
 	int min = 0, max = 0, max_length;
 	struct node*root = NULL;
-	root = insert(root, 2);
-	insert(root, 3);
+	root = insert(root, 10);
+	insert(root, 5);
+	insert(root, 12);
+	insert(root, 4);
 	insert(root, 6);
-	insert(root, 8);
-	insert(root, 10);
 	insert(root, 15);
-	insert(root, 18);
+	insert(root, 11);
 	insert(root, 20);
 	insert(root, 10);
 	insert(root, 25);
@@ -113,8 +118,11 @@ void main() {
 	print_postorder(root);
 	max_length = max_depth(root);
 	printf("\n  the max depath of this binary tree is : %d ", max_length);
-	if (check_if_full(root))
+	if (if_full(root)) {
 		printf("\nis full\n");
-	else printf("\nis comblete\n");
+	}
+	if (if_complete(root)) {
+		printf("\nis comblete\n");
+	}
 	getchar();
 }
