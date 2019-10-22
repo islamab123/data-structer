@@ -41,12 +41,24 @@ struct node*searsh(struct node*temp, int data) {
 	//Key is smaller than temp's key 
 	return insert(temp->left, data);
 }
+int min_value(struct node*node) {
+	struct node* current = node;
+	/* loop down to find the leftmost leaf */
+	while (current->left != NULL)
+	{
+		current = current->left;
+	}
+	return(current->data);
+}
 void main() {
+	int min = 0;
 	struct node*root = NULL;
 	root = insert(root, 5);
 	insert(root, 4);
 	insert(root, 6);
 	insert(root, 9);
 	searsh(root, 6);
+	min = min_value(root);
+	printf("\n  the min value in this binary tree is :  %d", min);
 	getchar();
 }
