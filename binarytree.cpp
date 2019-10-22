@@ -50,8 +50,17 @@ int min_value(struct node*node) {
 	}
 	return(current->data);
 }
+int max_value(struct node*node) {
+	struct node* current = node;
+	/* loop down to find the rightmost leaf */
+	while (current->right != NULL)
+	{
+		current = current->right;
+	}
+	return(current->data);
+}
 void main() {
-	int min = 0;
+	int min = 0,max=0;
 	struct node*root = NULL;
 	root = insert(root, 5);
 	insert(root, 4);
@@ -60,5 +69,7 @@ void main() {
 	searsh(root, 6);
 	min = min_value(root);
 	printf("\n  the min value in this binary tree is :  %d", min);
+	max = max_value(root);
+	printf("\n  the max value in this binary tree is : %d", max);
 	getchar();
 }
