@@ -87,8 +87,23 @@ int print_postorder(struct node*node) {
 		printf("%d ", node->data);
 	}
 }
+int max_depth(struct node*node) {
+	if (node == NULL)//If tree is empty then return 0
+		return 0;
+	else
+	{
+		/* compute the depth of each subtree */
+		int l_depth = max_depth(node->left);// Get the max depth of left subtree recursively 
+		int r_depath = max_depth(node->right);//Get the max depth of right subtree recursively
+
+											  /* use the larger one */
+		if (l_depth > r_depath)
+			return(l_depth + 1);
+		else return(r_depath + 1);
+	}
+}
 void main() {
-	int min = 0,max=0;
+	int min = 0,max=0, max_length;
 	struct node*root = NULL;
 	root = insert(root, 5);
 	insert(root, 4);
@@ -103,5 +118,7 @@ void main() {
 	print_inorder(root);
 	printf("\nthe postorder print :\n");
 	print_postorder(root);
+	max_length = max_depth(root);
+	printf("\n  the max depath of this binary tree is : %d ", max_length);
 	getchar();
 }
